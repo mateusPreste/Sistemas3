@@ -3,4 +3,4 @@ project(Schedule)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Schedule Sistemas3/src/main.cpp Sistemas3/src/Clock.cpp Sistemas3/src/Clock.h Sistemas3/src/Process.cpp Sistemas3/src/Process.h Sistemas3/src/Queue.cpp Sistemas3/src/Queue.h Sistemas3/src/Schedule.cpp Sistemas3/src/Schedule.h Sistemas3/src/Memory.cpp Sistemas3/src/Memory.h Sistemas3/src/IO.cpp Sistemas3/src/IO.h Sistemas3/src/CPU.cpp Sistemas3/src/CPU.h Sistemas3/src/Cycle_Element.cpp Sistemas3/src/Cycle_Element.h Sistemas3/src/Computer.cpp Sistemas3/src/Computer.h)
+add_executable(Schedule src/main.cpp src/Clock.cpp src/Clock.h src/Process.cpp src/Process.h src/Queue.cpp src/Queue.h src/Schedule.cpp src/Schedule.h src/Memory.cpp src/Memory.h src/IO.cpp src/IO.h src/CPU.cpp src/CPU.h src/Cycle_Element.cpp src/Cycle_Element.h src/Computer.cpp src/Computer.h)
