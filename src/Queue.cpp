@@ -12,7 +12,7 @@ Queue::Queue(int id, int quantum) {
 
 void Queue::addProcess(Process* process) {
     process->setLevel(getID());
-    std::cout << "ADDED IN " << getID() << " " << getQuantum() << std::endl;
+    std::cout << "O PROCESSO " << process->getId() << ", FOI ADICIONADO NA LISTA: " << getID() << " QUANTUM DE: " << getQuantum() << std::endl;
     list.push_back(process);
 }
 
@@ -20,7 +20,7 @@ Process* Queue::nextProcess() {
     auto it = list.begin();
     if(!list.empty()){
         Process* head = *it;
-        std::cout << ">>> " << head->getCPU() << " " << head->getIO() << std::endl;
+        std::cout << "executando processo " << head->getId() << ": cpuInst " << head->getCPU() << " ioInst: " << head->getIO() << std::endl;
         list.erase(list.begin());
         return head;
     } else{

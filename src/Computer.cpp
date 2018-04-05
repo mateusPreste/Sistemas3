@@ -24,7 +24,7 @@ Computer::Computer(int filas, int quantumL[], int S, int contSwitchPenality) {
 }
 
 void Computer::clock() {
-        clocks++;
+    clocks++;
 
     if(!memory->empty()){
         memory->clock();
@@ -35,7 +35,7 @@ void Computer::clock() {
     schedule->clock();
     cpu->clock();
     io->clock();
-    std::cout << "CLOCK: " << clocks << std::endl;
+    std::cout << ">>> FIM DO CLOCK: " << clocks << std::endl << std::endl;
 
 
     if(clocks % S == 0 && cpu->executing != nullptr){
@@ -47,19 +47,21 @@ void Computer::clock() {
 }
 
 bool Computer::executing() {
-    return !(cpu->executing == nullptr && schedule->size() == 0) || !memory->empty();
+    return !(cpu->executing == nullptr && schedule->size() == 0) || !memory->empty() || io->waitListSize() != 0;
 }
 
 void Computer::input() {
     int amount;
     std::cin >> amount;
     int x, y, z;
+    int id = 1;
     while(amount--){
         std::cin >> x >> y >> z;
-        memory->addProcess(x, y, z);
+        memory->addProcess(x, y, z, id);
+        ++id;
     }
 }
 
 void Computer::results() {
-    std::cout << "Resultados: " << clocks << "  " << schedule->size() << std::endl;
+    std::cout << "Resultados: " << clocks << std::endl;
 }

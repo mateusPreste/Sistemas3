@@ -19,6 +19,8 @@ public:
     void clock() override;
     void gamb();
     void add(Process*);
+
+    unsigned long waitListSize();
 };
 
 

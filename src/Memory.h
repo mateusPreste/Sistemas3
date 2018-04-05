@@ -17,7 +17,7 @@ private:
     Schedule* schedule = nullptr;
 public:
     Memory(Schedule*);
-    void addProcess(int x, int y, int z);
+    void addProcess(int x, int y, int z, int id);
     void clock() override; //add process to Schedule at the right time
     bool empty();
 };

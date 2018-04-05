@@ -8,8 +8,8 @@ Memory::Memory(Schedule* schedule) {
     this->schedule = schedule;
 }
 
-void Memory::addProcess(int x, int y, int z){
-    Process* newProcess = new Process(x, y, z);
+void Memory::addProcess(int x, int y, int z, int id){
+    Process* newProcess = new Process(x, y, z, id);
     list.push_back(newProcess);
 }
 

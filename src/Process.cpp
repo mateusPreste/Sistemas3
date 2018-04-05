@@ -5,8 +5,9 @@
 #include <iostream>
 #include "Process.h"
 
-Process::Process(int x, int y, int z){
+Process::Process(int x, int y, int z, int id){
     this->clock = clock;
+    this->label = "P"+std::to_string(id);
     inTime = x;
     outTime = 0;
     cpuInst = static_cast<int>(y * ((z * 1.0) / 100.0));
@@ -14,7 +15,6 @@ Process::Process(int x, int y, int z){
     consumedTime = 0;
     ioTimeOut = 0;
     level = 0;
-    std::cout << ioInst << " " << cpuInst << std::endl;
 }
 
 void Process::consumeCPU(){
@@ -53,7 +53,7 @@ int Process::getIO() {
 }
 
 int Process::waitC() {
-    if(--ioTimeOut){
+    if(ioTimeOut-- == 0){
         return 0; // yet waiting
     }
     return 1; //finish
@@ -69,4 +69,8 @@ int Process::execTime() {
 
 void Process::setLevel(int level) {
     this->level = level;
+}
+
+std::string Process::getId() {
+    return label;
 }

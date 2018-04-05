@@ -31,6 +31,10 @@ Process* Schedule::nextProcess() {
 }
 
 void Schedule::addProcess(Process* newProcess) {
+    //Dead Process
+    if(newProcess->getIO() == 0 && newProcess->getCPU() == 0){
+        return;
+    }
     Queue* thisQueue = nullptr;
     for(Queue* queue : schedule){
         thisQueue = queue;

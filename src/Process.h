@@ -7,10 +7,11 @@
 
 
 #include "Clock.h"
+#include <string>
 
 class Process{
 public:
-    Process(int, int, int);
+    Process(int, int, int, int);
     void consumeCPU();
     void consumeIO();
     void resetConsumed();
@@ -23,12 +24,14 @@ public:
     int getCPU();
     int getIO();
     int execTime();
+    std::string getId();
 private:
     int inTime, outTime; //life cycle
     int level;
     int cpuInst;
     int ioInst, ioTimeOut;
     int consumedTime;
+    std::string label;
     Clock clock;
 };
 
