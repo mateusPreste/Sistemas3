@@ -17,17 +17,19 @@ public:
     void resetConsumed();
     void setOut(int);
     void setLevel(int);
-    int waitC(); //decrement ioTimeOut
+    int waiting(); //decrement ioTimeOut
     int getInTime();
     int getLevel();
     int getConsumedT();
     int getCPU();
     int getIO();
     int execTime();
+    int waitTime();
     std::string getId();
 private:
     int inTime, outTime; //life cycle
     int level;
+    int totalInst;
     int cpuInst;
     int ioInst, ioTimeOut;
     int consumedTime;

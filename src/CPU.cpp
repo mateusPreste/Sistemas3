@@ -13,7 +13,8 @@ CPU::CPU(IO* io, Schedule* schedule, int CSPENALITY) {
 }
 
 void CPU::clock() {
-    intClock.nextClock();
+    Cycle_Element::clock();
+
     if(CSTime != 0){
         CSTime--;
         std::cout << "Trocando Contexto" << std::endl;
@@ -22,11 +23,13 @@ void CPU::clock() {
         std::cout << "SEM PROCESSO NA CPU" << std::endl;
         return;
     } else if(executing->getIO() == 0 && executing->getCPU() == 0){
-        std::cout << "FIM DO PROCESSO" << std::endl;
-        //std::cout << executing << std::endl;
+        executing->setOut(intClock.getClock());
+        std::cout << "FIM DO PROCESSO " << executing->getId() << ": "
+                  << "tempo de execucao: " << executing->execTime() <<std::endl;
+        Texec += executing->execTime();
+        Twait += executing->waitTime();
         delete executing;
         executing = nullptr;
-        //executing->setOut(intClock.getClock());
         contextSwitch();
     } else{
         if(executing->getIO() != 0){
@@ -38,7 +41,17 @@ void CPU::clock() {
             std::cout << "EXECUTANDO " << executing->getId() << " na CPU "
                       << executing->getConsumedT() << "/" << quantum << " quantums consumidos" << std::endl;
             executing->consumeCPU();
-            if(executing->getConsumedT() == quantum){
+
+            if(executing != nullptr && executing->getIO() == 0 && executing->getCPU() == 0){
+                executing->setOut(intClock.getClock());
+                std::cout << "FIM DO PROCESSO " << executing->getId() << ": "
+                          << "tempo de execucao: " << executing->execTime() <<std::endl;
+                Texec += executing->execTime();
+                Twait += executing->waitTime();
+                delete executing;
+                executing = nullptr;
+                contextSwitch();
+            } else if(executing->getConsumedT() == quantum){
                 std::cout << "ACABOU O QUANTUM" << std::endl;
                 schedule->addProcess(executing);
                 contextSwitch();
@@ -46,14 +59,7 @@ void CPU::clock() {
         }
     }
 
-    if(executing != nullptr && executing->getIO() == 0 && executing->getCPU() == 0){
-        executing->setOut(intClock.getClock());
-        std::cout << "FIM DO PROCESSO " << executing->getId() << ": "
-                  << "tempo de execucao: " << executing->execTime() <<std::endl;
-        delete executing;
-        executing = nullptr;
-        contextSwitch();
-    }
+
 }
 
 void CPU::contextSwitch() {

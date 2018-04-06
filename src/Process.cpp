@@ -11,6 +11,7 @@ Process::Process(int x, int y, int z, int id){
     inTime = x;
     outTime = 0;
     cpuInst = static_cast<int>(y * ((z * 1.0) / 100.0));
+    totalInst = y;
     ioInst = y-cpuInst;
     consumedTime = 0;
     ioTimeOut = 0;
@@ -28,7 +29,7 @@ int Process::getInTime() {
 
 void Process::consumeIO() {
     ++consumedTime;
-    ioTimeOut = 4;
+    ioTimeOut = 0;
     --ioInst;
 }
 
@@ -52,7 +53,7 @@ int Process::getIO() {
     return ioInst;
 }
 
-int Process::waitC() {
+int Process::waiting() {
     if(ioTimeOut-- == 0){
         return 0; // yet waiting
     }
@@ -73,4 +74,8 @@ void Process::setLevel(int level) {
 
 std::string Process::getId() {
     return label;
+}
+
+int Process::waitTime() {
+    return execTime()-totalInst;
 }

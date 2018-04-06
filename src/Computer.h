@@ -22,8 +22,9 @@ private:
     Memory* memory;
     int filas, S, constSwitchPenality;
     int* quantumL;
+    int processes = 0;
 public:
-    Computer(int filas, int* quantumL, int S, int contSwitchPenality);
+    Computer(int, int*, int, int);
     void input();
     void clock();
     void results();

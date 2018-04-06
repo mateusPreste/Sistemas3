@@ -33,8 +33,8 @@ void Computer::clock() {
         cpu->firstProcess();
     }
     schedule->clock();
-    cpu->clock();
     io->clock();
+    cpu->clock();
     std::cout << ">>> FIM DO CLOCK: " << clocks << std::endl << std::endl;
 
 
@@ -53,6 +53,7 @@ bool Computer::executing() {
 void Computer::input() {
     int amount;
     std::cin >> amount;
+    processes = amount;
     int x, y, z;
     int id = 1;
     while(amount--){
@@ -63,5 +64,6 @@ void Computer::input() {
 }
 
 void Computer::results() {
-    std::cout << "Resultados: " << clocks << std::endl;
+    std::cout << "Resultados: " << clocks << std::endl << "Tempo de Execucao: " << (double) cpu->Texec/processes
+              << std::endl << "Tempo de Espera: " << (double) cpu->Twait/processes;
 }

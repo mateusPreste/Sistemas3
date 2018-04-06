@@ -25,6 +25,8 @@ public:
     void contextSwitch();
     void firstProcess();
     void setQuantum(int);
+    int Texec = 0;
+    int Twait = 0;
 };
 
 

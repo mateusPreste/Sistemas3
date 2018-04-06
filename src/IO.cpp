@@ -14,7 +14,7 @@ void IO::clock() {
     auto it = waitList.begin();
     for(it; it != waitList.end(); ){
         Process* waitProcess = *it;
-        if(!waitProcess->waitC()){
+        if(!waitProcess->waiting()){
             std::cout << "ACABOU A ESPERA, " << waitProcess->getId() << " NAO ESTA MAIS ESPERANDO" << std::endl;
             waitList.erase(it);
             schedule->addProcess(waitProcess);
